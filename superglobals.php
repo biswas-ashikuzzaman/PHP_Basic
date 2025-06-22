@@ -14,6 +14,11 @@
 <?php
 echo $_POST['username'];
 ?>
+echo "<br>"
+<!-- URL: example.com?name=Ashik -->
+<?php
+echo $_GET['name']; // Output: Ashik
+?>
 
 </body>
 </html>
