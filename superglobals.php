@@ -6,23 +6,14 @@
     <title>Super_Globals</title>
 </head>
 <body>
-    <?php
-    function info() {
-        $name="ashik";
-        echo $name;
-    }
-    info();
+    <form method="POST">
+  <input type="text" name="username">
+  <input type="submit">
+</form>
 
-    ?>
-    <h1>Global Variable</h1>
-    <?php
-$a=12;
-$b=10;
-
-?>
-<h1>Super_Globals</h1>
 <?php
-
+echo $_POST['username'];
 ?>
+
 </body>
 </html>
