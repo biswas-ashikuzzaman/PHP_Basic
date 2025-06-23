@@ -6,6 +6,9 @@
     <title>String Function</title>
 </head>
 <body>
-    
+    <?php
+echo strlen("Hello World");  // Output: 11
+?>
+
 </body>
 </html>
