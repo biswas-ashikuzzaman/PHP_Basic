@@ -10,6 +10,7 @@
     $fruits= array("banna","mango","litchi","jackfruit","","","",);
     echo $fruits[2]; //output
     ?>
+    <br>
     <!-- shortcut way -->
      <?php
     $fruits1= ["banna","mango","litchi","jackfruit","","","",];
