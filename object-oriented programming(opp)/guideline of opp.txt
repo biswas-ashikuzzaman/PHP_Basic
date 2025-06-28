@@ -1,0 +1,63 @@
+Object-Oriented Programming (OOP) is a programming paradigm based on the concept of **objects**, which can contain data and code: data in the form of **fields** (often called attributes or properties), and code in the form of **methods** (functions attached to the object). Here are the core basics:
+
+---
+
+### 💡 **Four Main Principles of OOP**
+
+1. **Encapsulation**
+
+   * Bundles data (attributes) and methods that operate on the data into a single unit (class).
+   * Controls access to data using access modifiers (`private`, `protected`, `public`).
+   * Example: You can hide the internal state of an object and only allow changes through methods.
+
+2. **Abstraction**
+
+   * Hides complex implementation details and shows only the necessary features of an object.
+   * Focuses on **what** an object does instead of **how** it does it.
+
+3. **Inheritance**
+
+   * Allows one class (child/subclass) to inherit properties and methods from another (parent/superclass).
+   * Promotes code reuse.
+   * Example: A `Dog` class can inherit from an `Animal` class.
+
+4. **Polymorphism**
+
+   * Allows objects of different classes to be treated as objects of a common superclass.
+   * Supports method overriding (redefining a method in a subclass).
+   * Example: A method `makeSound()` can behave differently for `Dog` and `Cat`.
+
+---
+
+### 🧱 **Key OOP Concepts**
+
+* **Class**: A blueprint for creating objects. Defines attributes and methods.
+* **Object**: An instance of a class. Has real values instead of placeholders.
+* **Method**: A function defined inside a class.
+* **Constructor**: A special method used to initialize new objects.
+* **Instance Variable**: A variable defined in a class for which each object has a different value.
+
+---
+
+### 📝 **Simple Python Example**
+
+```python
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        return "Some sound"
+
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name} says Woof!"
+
+# Usage
+dog = Dog("Buddy")
+print(dog.speak())  # Output: Buddy says Woof!
+```
+
+---
+
+

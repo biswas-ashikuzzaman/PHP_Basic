@@ -14,5 +14,20 @@
 }
 
    ?> 
+   <br>
+   <?php
+   if (isset($_POST['submit'])) {
+
+    if (!isset($_POST['name']) || !isset($_POST['email'])) {
+        echo "Name and Email are required!";
+    } else {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        echo "Welcome, $name";
+    }
+
+}
+
+   ?>
 </body>
 </html>
