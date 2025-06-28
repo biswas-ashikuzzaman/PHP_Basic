@@ -1,0 +1,131 @@
+PHP `isset()` Comprehensive Guide
+==================================
+
+1. What is `isset()`?
+---------------------
+`isset()` হল PHP-এর একটি ভেরিয়েবল চেকিং ফাংশন, যা যাচাই করে কোনো ভেরিয়েবল *সেট আছে কিনা* এবং *null নয় কিনা*।
+
+Syntax:
+    isset(mixed $var, mixed ...$vars): bool
+
+
+2. Breakdown of the Definition
+------------------------------
+- **PHP built‑in function** – সরাসরি ব্যবহার করা যায়, আলাদা করে ডিফাইন করতে হয় না।
+- **Variable checking** – ভেরিয়েবল declare করা হয়েছে কিনা এবং তার মান `null` নয় কিনা যাচাই করে।
+- **Returns** – সব ভেরিয়েবল set এবং not‑null হলে `true`, অন্যথায় `false`।
+
+Example 1 – Variable is set
+---------------------------
+```php
+$country = "Bangladesh";
+
+if (isset($country)) {
+    echo "Variable is set and not null.";
+}
+```
+
+Example 2 – Variable is `null`
+------------------------------
+```php
+$city = null;
+
+if (isset($city)) {
+    echo "City is set.";
+} else {
+    echo "City is not set or null.";
+}
+```
+
+Example 3 – Variable does not exist
+-----------------------------------
+```php
+if (isset($district)) {
+    echo "District exists!";
+} else {
+    echo "District does not exist!";
+}
+```
+
+3. Benefits of `isset()`
+------------------------
+
+| # | Benefit | Explanation | Mini‑Example |
+|---|---------|-------------|--------------|
+| 1 | Avoids *Undefined Variable* errors | আগে চেক করলে error আটকায় | `if (isset($name)) echo $name;` |
+| 2 | Form submission check | `$_POST/$_GET` ডেটা এসেছে কিনা যাচাই | `if (isset($_POST['submit'])) { … }` |
+| 3 | Multiple variable check | একসাথে কয়েকটি ভেরিয়েবল যাচাই | `isset($a, $b, $c)` |
+| 4 | Detect null values | null হলে false রিটার্ন | `$x = null; isset($x) // false` |
+| 5 | Optional input validation | API বা optional ফিল্ড যাচাই | `if (isset($_POST['email'])) …` |
+| 6 | Cleaner, safer code | Readable & bug‑free | `if (isset($user['name'])) …` |
+
+Truth Table
+-----------
+| Condition                          | `isset()` Returns |
+|------------------------------------|-------------------|
+| Variable exists & not null         | **true**          |
+| Variable exists but null           | false             |
+| Variable not defined               | false             |
+
+4. Mini Project – Registration Form
+-----------------------------------
+
+File: **register.php**
+
+```php
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+</head>
+<body>
+
+<h2>Simple Registration Form</h2>
+
+<form method="post">
+    Name:  <input type="text"   name="name"><br><br>
+    Email: <input type="email"  name="email"><br><br>
+    Age:   <input type="number" name="age"><br><br>
+    <input type="submit" name="submit" value="Register">
+</form>
+
+<?php
+// Check if form submitted
+if (isset($_POST['submit'])) {
+
+    // Optionally check individual fields too
+    if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['age'])) {
+
+        $name  = $_POST['name'];
+        $email = $_POST['email'];
+        $age   = $_POST['age'];
+
+        echo "<h3>Registration Successful!</h3>";
+        echo "Name:  " . $name  . "<br>";
+        echo "Email: " . $email . "<br>";
+        echo "Age:   " . $age   . "<br>";
+
+    } else {
+        echo "All fields are required!";
+    }
+}
+?>
+
+</body>
+</html>
+```
+
+How it works
+------------
+1. **method="post"** – ফর্ম ডেটা `$_POST` তে যাবে।  
+2. **isset($_POST['submit'])** – সাবমিট বোতাম ক্লিক হয়েছে কিনা চেক করে।  
+3. **isset($_POST['name'])** ইত্যাদি – ইনপুট এসেছে কিনা চেক করে।  
+4. ফাঁকা ইনপুট আটকাতে চাইলে `empty()` ব্যবহার করা যেতে পারে।
+
+5. Next Steps / Exercises
+-------------------------
+- ফর্মে *Gender* ও *Phone* ফিল্ড যোগ করো এবং সেগুলোকেও `isset()` দিয়ে চেক করো।
+- যদি কোনো ফিল্ড খালি থাকে, লাল রঙে error মেসেজ দেখাও।
+- ডেটা একটি ফাইলে বা ডেটাবেসে সেভ করে রাখো।
+
+Happy coding!

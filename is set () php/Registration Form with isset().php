@@ -36,6 +36,17 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
+<br>
+<?php
+if (isset($_POST['submit'])) {
+    if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['age'])) {
+        // কাজ করো
+    } else {
+        echo "Please fill all the fields!";
+    }
+}
+?>
+
 
 </body>
 </html>

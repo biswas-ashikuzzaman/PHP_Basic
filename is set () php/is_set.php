@@ -25,7 +25,7 @@
     ?>
     <br>
     <?php
-    if(isset($districte)) {
+    if(isset($district)) {
         echo "District is set!";
     }
     else {
