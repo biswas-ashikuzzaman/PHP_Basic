@@ -6,6 +6,21 @@
     <title>Get Set</title>
 </head>
 <body>
-    
+    <?php
+    class Person {
+    private $name;
+
+    // Setter method
+    public function setName($name) {
+        $this->name = $name;
+    }
+
+    // Getter method
+    public function getName() {
+        return $this->name;
+    }
+}
+
+    ?>
 </body>
 </html>
