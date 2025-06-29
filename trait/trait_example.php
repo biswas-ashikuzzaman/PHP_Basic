@@ -27,14 +27,15 @@
     {
         use Fruits;
     }
-    class flower
+    class Jadu
     {
-        use Flower;
+        use Flower,Fruits;
     }
     $obj = new Fruits2();
     $obj->fruits1();
     
-    $obj2 = new flower();
+    
+    $obj2 = new Jadu();
     $obj2->flower1();
     $obj2->fruits1();
     ?>
