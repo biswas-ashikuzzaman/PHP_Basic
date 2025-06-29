@@ -1,0 +1,126 @@
+PHP Namespace Guide (বাংলা + English)
+==========================================
+
+1. Namespace কী?
+----------------
+PHP‑র Namespace হলো একটি 'container' বা package‑type mechanism, যা ক্লাস, ফাংশন ও কনস্ট্যান্ট‑এর নামের conflict দূর করে। বড় প্রজেক্টে একই নামে একাধিক ক্লাস/ফাংশন থাকতে পারে; namespace সেইসবকে আলাদা করে রাখে।
+
+2. Basic Syntax
+---------------
+```php
+<?php
+namespace MyProject;
+
+class User {
+    public function getName() {
+        return "Ashik";
+    }
+}
+```
+`namespace MyProject;` দিয়ে একটি নতুন namespace ঘোষণা করা হয়েছে। এর ভেতরের সব ক্লাস‑ফাংশন‑কনস্ট্যান্ট এখন `MyProject` নামের “প্যাকেজে” আছে।
+
+3. Namespace ছাড়া কী সমস্যা?
+-----------------------------
+```php
+// file1.php
+class Helper { /* ... */ }
+
+// file2.php
+class Helper { /* ... */ }
+
+// main.php (include both)
+Fatal error: Cannot redeclare class Helper
+```
+একই নামের দু’টি ক্লাস PHP সহ্য করে না → redeclare error।
+
+4. Namespace দিয়ে সমাধান
+------------------------
+```php
+// file1.php
+namespace Project1;
+class Helper { /* ... */ }
+
+// file2.php
+namespace Project2;
+class Helper { /* ... */ }
+```
+```php
+require 'file1.php';
+require 'file2.php';
+
+$h1 = new \Project1\Helper(); // “\” = global থেকে শুরু
+$h2 = new \Project2\Helper();
+```
+
+5. `use` ও Alias
+----------------
+```php
+use Project1\Helper as P1Helper;
+use Project2\Helper as P2Helper;
+
+$p1 = new P1Helper();
+$p2 = new P2Helper();
+```
+`use` keyword দিয়ে লম্বা fully‑qualified নামকে ছোট করে আনা যায়; `as` দিয়ে alias ঠিক করা যায়।
+
+6. Global Namespace
+-------------------
+PHP‑এর built‑in ফাংশন/ক্লাস সব “global namespace”‑এ থাকে।
+```php
+namespace MyApp;
+
+function strlen($s){ return "custom"; }
+echo strlen("abc");   // custom
+echo \strlen("abc"); // 3  → global function
+```
+উদাহরণে `\strlen` দিয়ে আমরা স্পষ্ট করেছি যে built‑in version চাই।
+
+7. Autoloading (Composer)
+-------------------------
+`composer.json`:
+```json
+{
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  }
+}
+```
+এরপর `src/Controllers/HomeController.php`‑এ:
+```php
+namespace App\Controllers;
+class HomeController { /* ... */ }
+```
+Composer‑এর `dump-autoload` রান করলে `App\Controllers\HomeController` ক্লাস অটোলোড হবে।
+
+8. Namespace vs Trait vs Class Folder
+-------------------------------------
+| Aspect              | Namespace                       | Trait                | Folder Structure            |
+|---------------------|---------------------------------|----------------------|-----------------------------|
+| লক্ষ্য              | Name conflict সমাধান            | Code reuse           | Files organise করা          |
+| Multiple inheritance| N/A (structural)               | Supported via `use`  | N/A                         |
+| Autoload সুবিধা     | হ্যাঁ (PSR-4)                   | হ্যাঁ, trait‑ও class | ফাইল পথ map করে            |
+
+9. Best Practices
+-----------------
+* **PSR‑4** অনুসরণ করে namespace ও ফোল্ডার map করুন।
+* প্রতিটি package/মডিউলের জন্য আলাদা শীর্ষ namespace ব্যবহার করুন (e.g., `App\Services`, `Vendor\Logger`).
+* ফাইলের একদম প্রথম লাইনে `namespace` ঘোষণা করুন, declare‑এর আগে কোনো output/whitespace রাখবেন না।
+
+10. Quick Reference
+-------------------
+```php
+namespace Foo\Bar;         // ঘোষণায় backslash (\) দিয়ে sub‑namespace
+use Foo\Bar\Baz;         // import
+use Foo\Bar\Baz as Bz;   // alias
+new \DateTime();          // global class
+```
+
+সারসংক্ষেপ
+-----------
+Namespace = **নামসংঘর্ষের প্রতিষেধক**।  
+– ছাড়া `Helper`, `Controller`, `Service` ক্লাসের ভিড় সামলাতে ঘাম ঝরবে।  
+– Composer দ্বারা অটোলোড করলে namespace structure‑ই ফাইল‑স্ট্রাকচারের map তৈরি করে।  
+
+Happy coding! 🚀
