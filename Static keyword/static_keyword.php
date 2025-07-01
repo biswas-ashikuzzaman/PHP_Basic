@@ -21,3 +21,13 @@ class S{
 $p=new S();
 echo $p->staticValue();
 ?>
+<?php 
+class ss {
+    public static $value = "50";
+    public function staticValue(){
+        return self::$value;    
+}
+public static function show(){
+    return"this is static method";
+}
+?>
